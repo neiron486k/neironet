@@ -31,6 +31,12 @@ class Article implements TranslatableInterface
     private $id;
 
     /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
+    /**
      * @var ArticleTranslation
      * @ORM\OneToMany(targetEntity="App\Entity\Translation\ArticleTranslation", mappedBy="article", cascade={"all"})
      * @Assert\Valid
@@ -39,6 +45,7 @@ class Article implements TranslatableInterface
 
     public function __construct()
     {
+        $this->isPublished = false;
         $this->translations = new ArrayCollection();
     }
 
@@ -73,4 +80,23 @@ class Article implements TranslatableInterface
     {
         return (string)$this->getTranslation()->getContent();
     }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * @param bool $isPublished
+     * @return Article
+     */
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+        return $this;
+    }
+
 }

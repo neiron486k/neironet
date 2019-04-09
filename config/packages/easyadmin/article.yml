@@ -3,3 +3,12 @@ easy_admin:
         Article:
             class: App\Entity\Article
             controller: App\Controller\Admin\ArticleController
+            list:
+                fields:
+                    - id
+                    - isPublished
+                    - title
+                    - description
+            form:
+                fields:
+                    - isPublished

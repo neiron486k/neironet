@@ -128,4 +128,9 @@ class ArticleTranslation implements TranslationInterface
         $this->content = $content;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
 }
