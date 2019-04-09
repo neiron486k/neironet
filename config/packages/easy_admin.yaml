@@ -1,0 +1,9 @@
+imports:
+    - { resource: easyadmin/user.yml }
+    - { resource: easyadmin/article.yml }
+    - { resource: easyadmin/review.yml }
+    
+easy_admin:
+    design:
+        form_theme:
+            - '@EasyAdmin/form/bootstrap_4.html.twig'
