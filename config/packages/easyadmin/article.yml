@@ -2,3 +2,7 @@ easy_admin:
     entities:
         Article:
             class: App\Entity\Article
+            controller: App\Controller\Admin\ArticleController
+#            form:
+#                fields:
+#                    - { property: 'translations', type: 'A2lix\TranslationFormBundle\Form\Type\TranslationsType' }

@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ApiResource()
@@ -12,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
+    use ORMBehaviors\Translatable\Translatable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,16 +25,9 @@ class Article
     private $id;
 
     /**
-     * @var string
-     * @ORM\Column(type="string")
+     * @Assert\Valid
      */
-    public $title;
-
-    /**
-     * @var string
-     * @ORM\Column(type="text", nullable=true)
-     */
-    public $content;
+    protected $translations;
 
     public function getId(): ?int
     {
