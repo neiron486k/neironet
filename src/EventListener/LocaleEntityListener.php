@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use App\Traits\TranslatableInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class LocaleEntityListener
@@ -22,7 +23,10 @@ class LocaleEntityListener
     public function postLoad(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
-        $entity->setLocale($this->listener->getLocale());
+
+        if ($entity instanceof TranslatableInterface) {
+            $entity->setLocale($this->listener->getLocale());
+        }
     }
 
     /**

@@ -26,7 +26,7 @@ trait TranslatableTrait
         return $this->translations;
     }
 
-    protected function getTranslation(): TranslationInterface
+    public function getTranslation(): TranslationInterface
     {
         $translationClassName = $this->getTranslationClassName();
         $translationClass = new $translationClassName();

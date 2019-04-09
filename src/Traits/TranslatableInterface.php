@@ -10,7 +10,7 @@ interface TranslatableInterface
 
     public function getTranslation();
 
-    public function setLocale(): self;
+    public function setLocale(string $locale);
 
     public function getLocale(): string;
 

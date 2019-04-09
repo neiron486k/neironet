@@ -21,10 +21,10 @@ trait TranslationTrait
     }
 
     /**
-     * @param string|null $lang
-     * @return $this
+     * @param string $lang
+     * @return TranslationTrait
      */
-    public function setLang(string $lang = null): self
+    public function setLang(string $lang): self
     {
         $this->lang = $lang;
         return $this;
