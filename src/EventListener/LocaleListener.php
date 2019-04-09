@@ -10,6 +10,16 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
  */
 class LocaleListener
 {
+    /**
+     * @var string
+     */
+    private $locale;
+
+    public function __construct(string $defaultLocale)
+    {
+        $this->locale = $defaultLocale;
+    }
+
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
@@ -17,6 +27,15 @@ class LocaleListener
 
         if ($locale) {
             $request->setLocale($locale);
+            $this->locale = $locale;
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
     }
 }
