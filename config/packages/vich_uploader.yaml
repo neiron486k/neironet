@@ -1,0 +1,19 @@
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        file_adapter:
+            local:
+                directory: '%kernel.project_dir%/public%app.path.images%'
+    filesystems:
+        file_fs:
+            adapter: file_adapter
+            alias: file_fs_filesystem
+
+vich_uploader:
+    db_driver: orm
+    storage: gaufrette
+    mappings:
+        images:
+            uri_prefix: '%app.path.images%'
+            upload_destination: file_fs
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
