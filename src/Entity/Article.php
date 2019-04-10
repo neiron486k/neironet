@@ -3,24 +3,26 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Entity\Translation\ArticleTranslation;
-use App\Traits\TranslatableInterface;
-use App\Traits\TranslatableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Traits\PublishedTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Asserts;
 
 /**
  * @ApiResource(
- *     normalizationContext={"groups"={"article"}}
+ *     normalizationContext={"groups"={"article"}},
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ *
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Table(name="articles")
  */
-class Article implements TranslatableInterface
+class Article
 {
-    use TranslatableTrait;
+    use TimestampableEntity,
+        PublishedTrait;
 
     /**
      * @ORM\Id()
@@ -31,23 +33,26 @@ class Article implements TranslatableInterface
     private $id;
 
     /**
-     * @var bool
-     * @ORM\Column(type="boolean")
+     * @var string
+     * @ORM\Column(type="string")
+     * @Asserts\NotBlank()
+     * @Groups({"article"})
      */
-    private $isPublished;
+    private $title;
 
     /**
-     * @var ArticleTranslation
-     * @ORM\OneToMany(targetEntity="App\Entity\Translation\ArticleTranslation", mappedBy="article", cascade={"all"})
-     * @Assert\Valid
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"article"})
      */
-    protected $translations;
+    private $description;
 
-    public function __construct()
-    {
-        $this->isPublished = false;
-        $this->translations = new ArrayCollection();
-    }
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"article"})
+     */
+    private $content;
 
     public function getId(): ?int
     {
@@ -56,47 +61,55 @@ class Article implements TranslatableInterface
 
     /**
      * @return string
-     * @Groups({"article"})
      */
     public function getTitle(): string
     {
-        return (string)$this->getTranslation()->getTitle();
+        return (string)$this->title;
     }
 
     /**
-     * @return string
-     * @Groups({"article"})
-     */
-    public function getDescription(): string
-    {
-        return (string)$this->getTranslation()->getDescription();
-    }
-
-    /**
-     * @return string
-     * @Groups({"article"})
-     */
-    public function getContent(): string
-    {
-        return (string)$this->getTranslation()->getContent();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPublished(): bool
-    {
-        return $this->isPublished;
-    }
-
-    /**
-     * @param bool $isPublished
+     * @param string $title
      * @return Article
      */
-    public function setIsPublished(bool $isPublished): self
+    public function setTitle(string $title = null): self
     {
-        $this->isPublished = $isPublished;
+        $this->title = $title;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return (string)$this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Article
+     */
+    public function setDescription(string $description = null): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return (string)$this->content;
+    }
+
+    /**
+     * @param string $content
+     * @return Article
+     */
+    public function setContent(string $content = null): self
+    {
+        $this->content = $content;
+        return $this;
+    }
 }

@@ -33,11 +33,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request, priority: 17 }
             
-    App\EventListener\LocaleEntityListener:
-        tags:
-            - { name: doctrine.event_listener, event: postLoad }
-            - { name: doctrine.event_listener, event: prePersist }
-            
+#    App\EventListener\LocaleEntityListener:
+#        tags:
+#            - { name: doctrine.event_listener, event: postLoad }
+#            - { name: doctrine.event_listener, event: prePersist }
+    
     App\Serializer\ApiNormalizer:
         decorates: 'api_platform.jsonld.normalizer.item'
         arguments:

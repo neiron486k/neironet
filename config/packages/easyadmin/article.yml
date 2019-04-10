@@ -9,6 +9,3 @@ easy_admin:
                     - isPublished
                     - title
                     - description
-            form:
-                fields:
-                    - isPublished
