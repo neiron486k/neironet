@@ -30,17 +30,51 @@ class Review
      * @ORM\Column(type="text")
      * @Groups({"review"})
      */
-    public $content;
+    private $content;
 
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
-    public $user;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string|null $content
+     * @return Review
+     */
+    public function setContent(string $content = null): self
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
+
 }

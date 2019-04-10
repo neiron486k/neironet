@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Asserts;
 
 /**
  * @ORM\Table(name="users")
@@ -36,10 +38,18 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var UserProfile
+     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"all"})
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
+     * @Asserts\Valid()
+     */
+    private $profile;
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Review", mappedBy="user")
      */
-    public $reviews;
+    private $reviews;
 
     public function __construct()
     {
@@ -70,7 +80,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -97,13 +107,39 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @return UserProfile
+     */
+    public function getProfile(): ?UserProfile
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param UserProfile $profile
+     * @return User
+     */
+    public function setProfile(UserProfile $profile): self
+    {
+        $this->profile = $profile;
         return $this;
     }
 
