@@ -13,7 +13,8 @@ use Symfony\Component\Panther\Client;
  */
 abstract class AbstractWebTestCase extends WebTestCase
 {
-    use RefreshDatabaseTrait;
+    use RefreshDatabaseTrait,
+        TestCaseTrait;
 
     /**
      * @var Client
