@@ -6,8 +6,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Traits\PublishedTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Translatable\Translatable;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Asserts;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ApiResource(
@@ -19,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Asserts;
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Table(name="articles")
  */
-class Article
+class Article implements Translatable
 {
     use TimestampableEntity,
         PublishedTrait;
@@ -37,6 +39,7 @@ class Article
      * @ORM\Column(type="string")
      * @Asserts\NotBlank()
      * @Groups({"article"})
+     * @Gedmo\Translatable
      */
     private $title;
 
@@ -44,6 +47,7 @@ class Article
      * @var string
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"article"})
+     * @Gedmo\Translatable
      */
     private $description;
 
@@ -51,6 +55,7 @@ class Article
      * @var string
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"article"})
+     * @Gedmo\Translatable
      */
     private $content;
 
