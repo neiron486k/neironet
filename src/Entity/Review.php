@@ -49,7 +49,7 @@ class Review
      */
     public function getContent(): string
     {
-        return $this->content;
+        return (string)$this->content;
     }
 
     /**
@@ -59,12 +59,13 @@ class Review
     public function setContent(string $content = null): self
     {
         $this->content = $content;
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
