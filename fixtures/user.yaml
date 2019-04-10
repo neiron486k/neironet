@@ -1,0 +1,22 @@
+App\Entity\UserProfile:
+    admin_profile:
+        firstName: admin
+        lastName: admin
+        avatar: admin.png
+    user_profile:
+        firstName: user
+        lastName: user
+        avatar: user.png
+        
+App\Entity\User:
+    admin:
+        email: admin@example.com
+        password: '<encodePassword(@self, admin)>'
+        profile: '@admin_profile'
+        roles: ['ROLE_ADMIN']
+    user:
+        email: user@example.com
+        password: '<encodePassword(@self, user)>'
+        profile: '@user_profile'
+        roles: ['ROLE_USER']
+       

@@ -48,6 +48,12 @@ class Article implements Translatable
     private $title;
 
     /**
+     * @Gedmo\Slug(fields={"title"}, updatable=false)
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"article"})
@@ -169,5 +175,23 @@ class Article implements Translatable
     public function getCover(): string
     {
         return (string)$this->cover;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug(): string
+    {
+        return (string)$this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Article
+     */
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+        return $this;
     }
 }
