@@ -1,0 +1,7 @@
+App\Entity\Article:
+    article_{1..10}:
+        title: <name()>
+        description: <sentence(10)>
+        content: <text()>
+        cover: image<current()>.png
+        isPublished: <boolean()>
