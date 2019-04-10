@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\UserProfile;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,6 +23,9 @@ class UserProfileType extends EasyAdminFormType
             ->add('firstName')
             ->add('lastName')
             ->add('middleName')
+            ->add('avatarFile', FileType::class, [
+                'required' => false
+            ]);
         ;
     }
 

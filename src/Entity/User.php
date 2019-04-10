@@ -39,7 +39,7 @@ class User implements UserInterface
 
     /**
      * @var UserProfile
-     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Asserts\Valid()
      */

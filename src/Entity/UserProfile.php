@@ -2,14 +2,22 @@
 
 namespace App\Entity;
 
+use App\Annotation\VichSerializableProperty;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assets;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserProfileRepository")
  * @ORM\Table(name="user_profiles")
+ * @Vich\Uploadable
  */
-class UserProfile
+class UserProfile implements \Serializable
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -34,6 +42,20 @@ class UserProfile
      * @ORM\Column(type="string", nullable=true)
      */
     private $middleNAme;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     * @VichSerializableProperty
+     */
+    private $avatar;
+
+    /**
+     * @var File
+     * @Vich\UploadableField(mapping="images", fileNameProperty="avatar")
+     * @Assets\NotBlank(groups={"create"})
+     */
+    private $avatarFile;
 
     public function getId(): ?int
     {
@@ -92,6 +114,62 @@ class UserProfile
     {
         $this->middleNAme = $middleNAme;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return (string)$this->avatar;
+    }
+
+    /**
+     * @param string $avatar
+     * @return UserProfile
+     */
+    public function setAvatar(string $avatar = null): self
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * @param File $avatarFile
+     * @return UserProfile
+     */
+    public function setAvatarFile(File $avatarFile = null): self
+    {
+        $this->avatarFile = $avatarFile;
+
+        if ($avatarFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+        ]);
+    }
+
+    public function unserialize($serialized): void
+    {
+        list ($this->id) = unserialize($serialized);
     }
 
     /**

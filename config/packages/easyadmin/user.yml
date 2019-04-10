@@ -8,10 +8,13 @@ easy_admin:
             list:
                 fields:
                     - id
+                    - { property: 'profile.avatar', type: 'image', base_path: '%app.path.images%' }
                     - email
                     - profile.firstName
                     - profile.lastName
                     - reviews
+            new:
+                form_options: { validation_groups: ['create'] }
             form:
                 fields:
                     - email
