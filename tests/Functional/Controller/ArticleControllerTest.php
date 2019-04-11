@@ -21,6 +21,7 @@ class ArticleControllerTest extends AbstractWebTestCase
         $this->assertTrue($response->isSuccessful());
         $content = json_decode($response->getContent(), true);
         $article = $content[0];
+        $this->assertHasKeys($article);
 
     }
 
