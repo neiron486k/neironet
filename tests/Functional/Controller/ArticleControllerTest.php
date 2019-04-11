@@ -16,7 +16,7 @@ class ArticleControllerTest extends AbstractWebTestCase
         $response = $this->request('GET', '/api/articles');
         $this->assertTrue($response->isSuccessful());
         $content = json_decode($response->getContent(), true);
-        $article = $content['hydra:member'][0];
+        $article = $content[0];
         $this->assertHasKeys($article);
     }
 

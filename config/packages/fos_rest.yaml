@@ -1,0 +1,14 @@
+fos_rest:
+    disable_csrf_role: ROLE_API
+    param_fetcher_listener:  true
+    body_listener: true
+    allowed_methods_listener:  true
+    versioning: true
+    view:
+        view_response_listener: 'force'
+    format_listener:
+        rules:
+            - { path: ^/api, fallback_format: json, prefer_extension: false }
+            - { path: ^/, stop: true }
+    serializer:
+        serialize_null: true

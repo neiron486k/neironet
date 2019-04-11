@@ -2,28 +2,23 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Traits\PublishedTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Translatable\Translatable;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Asserts;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use App\Annotation\VichSerializableProperty;
+use Fresh\VichUploaderSerializationBundle\Annotation as Fresh;
+use JMS\Serializer\Annotation as JMS;
 
 /**
- * @ApiResource(
- *     normalizationContext={"groups"={"article"}},
- *     collectionOperations={"get"},
- *     itemOperations={"get"}
- *
- * )
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Table(name="articles")
  * @Vich\Uploadable
+ * @Fresh\VichSerializableClass
+ * @JMS\ExclusionPolicy("all")
  */
 class Article implements Translatable
 {
@@ -34,7 +29,7 @@ class Article implements Translatable
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"article"})
+     * @JMS\Expose()
      */
     private $id;
 
@@ -42,38 +37,39 @@ class Article implements Translatable
      * @var string
      * @ORM\Column(type="string")
      * @Asserts\NotBlank()
-     * @Groups({"article"})
      * @Gedmo\Translatable
+     * @JMS\Expose()
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false)
      * @ORM\Column(length=128, unique=true)
+     * @JMS\Expose()
      */
     private $slug;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"article"})
      * @Gedmo\Translatable
+     * @JMS\Expose()
      */
     private $description;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"article"})
      * @Gedmo\Translatable
+     * @JMS\Expose()
      */
     private $content;
 
     /**
      * @var string
      * @ORM\Column(type="string")
-     * @Groups({"article"})
-     * @VichSerializableProperty
+     * @Fresh\VichSerializableField("coverFile")
+     * @JMS\Expose()
      */
     private $cover;
 

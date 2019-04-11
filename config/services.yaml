@@ -39,10 +39,5 @@ services:
 #            - { name: doctrine.event_listener, event: postLoad }
 #            - { name: doctrine.event_listener, event: prePersist }
     
-    App\Serializer\ApiNormalizer:
-        decorates: 'api_platform.jsonld.normalizer.item'
-        arguments:
-            $decorated: '@App\Serializer\ApiNormalizer.inner'
-            
     App\Alice\Faker\Provider\PasswordProvider:
         tags: [ { name: nelmio_alice.faker.provider } ]

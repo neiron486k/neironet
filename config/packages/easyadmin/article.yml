@@ -7,6 +7,7 @@ easy_admin:
                 fields:
                     - id
                     - isPublished
+                    - slug
                     - { property: 'cover', type: 'image', base_path: '%app.path.images%' }
                     - title
                     - description
@@ -14,6 +15,7 @@ easy_admin:
                 fields:
                     - id
                     - isPublished
+                    - slug
                     - { property: 'cover', type: 'image', base_path: '%app.path.images%' }
                     - title
                     - description
@@ -21,6 +23,7 @@ easy_admin:
             form:
                 fields:
                     - isPublished
+                    - slug
                     - title
                     - { property: 'coverFile', type: 'file' }
                     - description
