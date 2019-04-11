@@ -97,6 +97,9 @@
             "config/routes/easy_admin.yaml"
         ]
     },
+    "exsyst/swagger": {
+        "version": "v0.4.1"
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
@@ -222,6 +225,19 @@
             "config/packages/test/nelmio_alice.yaml"
         ]
     },
+    "nelmio/api-doc-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
+        },
+        "files": [
+            "config/packages/nelmio_api_doc.yaml",
+            "config/routes/nelmio_api_doc.yaml"
+        ]
+    },
     "nikic/php-parser": {
         "version": "v4.2.1"
     },
@@ -233,6 +249,15 @@
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.1.2"
+    },
+    "phpdocumentor/reflection-common": {
+        "version": "1.0.1"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "0.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -455,6 +480,9 @@
     "symfony/property-access": {
         "version": "v4.2.5"
     },
+    "symfony/property-info": {
+        "version": "v4.2.5"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -614,6 +642,9 @@
             "config/packages/vich_uploader.yaml"
         ]
     },
+    "webmozart/assert": {
+        "version": "1.4.0"
+    },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"
     },
@@ -625,5 +656,8 @@
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
+    },
+    "zircote/swagger-php": {
+        "version": "2.0.13"
     }
 }
