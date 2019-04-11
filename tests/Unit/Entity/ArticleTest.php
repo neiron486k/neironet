@@ -52,5 +52,4 @@ class ArticleTest extends TestCase
             ['slug', 'string', 'string']
         ];
     }
-
 }

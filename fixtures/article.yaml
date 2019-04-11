@@ -1,3 +1,10 @@
+App\Entity\ArticleType:
+    service:
+        code: service
+    work:
+        code: work
+    article:
+        code: article
 App\Entity\Article:
     article_{1..10}:
         title: <name()>
@@ -6,3 +13,4 @@ App\Entity\Article:
         content: <text()>
         cover: image<current()>.png
         isPublished: <boolean()>
+        type: '@service'

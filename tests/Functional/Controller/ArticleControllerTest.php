@@ -51,7 +51,9 @@ class ArticleControllerTest extends AbstractWebTestCase
 
         foreach ($expected as $key) {
             $this->assertArrayHasKey($key, $article);
-
         }
+
+        $this->assertArrayHasKey('id', $article['type']);
+        $this->assertArrayHasKey('code', $article['type']);
     }
 }

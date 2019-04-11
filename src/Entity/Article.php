@@ -13,6 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Fresh\VichUploaderSerializationBundle\Annotation as Fresh;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -80,6 +81,14 @@ class Article implements Translatable
      * @var File
      */
     private $coverFile;
+
+    /**
+     * @var ArticleType
+     * @ORM\ManyToOne(targetEntity="ArticleType")
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
+     * @JMS\Expose()
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -190,6 +199,24 @@ class Article implements Translatable
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @return ArticleType
+     */
+    public function getType(): ArticleType
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param ArticleType $type
+     * @return Article
+     */
+    public function setType(ArticleType $type): self
+    {
+        $this->type = $type;
         return $this;
     }
 }

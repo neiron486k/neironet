@@ -16,6 +16,7 @@ class ArticleController extends AbstractController
 {
     /**
      * @FOSRest\Get("/api/articles", name="get_articles")
+     * @FOSRest\View(serializerGroups={"Default"})
      * @param ArticleRepository $repository
      * @return \App\Entity\Article[]
      *
