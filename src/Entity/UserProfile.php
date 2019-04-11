@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Annotation\VichSerializableProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -46,7 +45,6 @@ class UserProfile implements \Serializable
     /**
      * @var string
      * @ORM\Column(type="string")
-     * @VichSerializableProperty
      */
     private $avatar;
 

@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Fresh\VichUploaderSerializationBundle\Annotation as Fresh;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -19,6 +20,7 @@ use JMS\Serializer\Annotation as JMS;
  * @Vich\Uploadable
  * @Fresh\VichSerializableClass
  * @JMS\ExclusionPolicy("all")
+ * @UniqueEntity({"slug"})
  */
 class Article implements Translatable
 {

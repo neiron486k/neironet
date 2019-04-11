@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 
 /**
@@ -17,8 +17,18 @@ class ArticleController extends AbstractController
      * @param ArticleRepository $repository
      * @return \App\Entity\Article[]
      */
-    public function index(ArticleRepository $repository)
+    public function getArticles(ArticleRepository $repository): array
     {
         return $repository->findAll();
+    }
+
+    /**
+     * @FOSRest\Get("/api/articles/{slug}", name="get_article")
+     * @param Article $article
+     * @return Article
+     */
+    public function getArticle(Article $article): Article
+    {
+        return $article;
     }
 }

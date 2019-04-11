@@ -1,7 +1,7 @@
 App\Entity\Article:
     article_{1..10}:
         title: <name()>
-        slug: <current()>
+        slug: slug<current()>
         description: <sentence(10)>
         content: <text()>
         cover: image<current()>.png
