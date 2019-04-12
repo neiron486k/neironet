@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
  * @ORM\Table(name="reviews")
+ * @JMS\ExclusionPolicy("all")
  */
 class Review
 {
@@ -14,12 +16,14 @@ class Review
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @JMS\Expose()
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(type="text")
+     * @JMS\Expose()
      */
     private $content;
 
@@ -27,6 +31,8 @@ class Review
      * @var User
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
+     * @JMS\Expose()
+     * @JMS\Groups({"user"})
      */
     private $user;
 

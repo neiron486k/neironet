@@ -38,6 +38,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/articles, method:['GET'], roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/api/reviews, method:['GET'], roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
