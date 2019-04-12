@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\PriorityTrait;
 use App\Traits\PublishedTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -13,19 +14,23 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Fresh\VichUploaderSerializationBundle\Annotation as Fresh;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use JMS\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- * @ORM\Table(name="articles")
+ * @ORM\Table(
+ *     name="articles",
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="priority_idx", columns={"priority", "type_id"})}
+ * )
  * @Vich\Uploadable
  * @Fresh\VichSerializableClass
  * @JMS\ExclusionPolicy("all")
  * @UniqueEntity({"slug"})
+ * @UniqueEntity({"priority", "type"})
  */
 class Article implements Translatable
 {
     use TimestampableEntity,
+        PriorityTrait,
         PublishedTrait;
 
     /**

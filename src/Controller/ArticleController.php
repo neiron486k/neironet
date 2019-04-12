@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
      */
     public function getArticles(ArticleRepository $repository): array
     {
-        return $repository->findAll();
+        return $repository->getArticles();
     }
 
     /**

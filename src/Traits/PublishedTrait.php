@@ -14,7 +14,7 @@ trait PublishedTrait
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $isPublished = false;
+    protected $isPublished = false;
 
     /**
      * @return bool

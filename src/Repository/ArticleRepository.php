@@ -16,4 +16,14 @@ class ArticleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Article::class);
     }
+
+    /**
+     * @return array
+     */
+    public function getArticles(): array
+    {
+        $builder = $this->createQueryBuilder('a');
+        $builder->orderBy('a.priority', 'desc');
+        return $builder->getQuery()->getResult();
+    }
 }

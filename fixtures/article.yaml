@@ -14,3 +14,4 @@ App\Entity\Article:
         cover: image<current()>.png
         isPublished: <boolean()>
         type: '@service'
+        priority: <current()>
