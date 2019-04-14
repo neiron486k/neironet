@@ -16,6 +16,7 @@ class ReviewController extends AbstractController
 {
     /**
      * @FOSRest\Get("/api/reviews", name="get_reviews")
+     * @FOSRest\View(serializerGroups={"Default", "user"})
      * @param ReviewRepository $repository
      * @return \App\Entity\Review[]
      *
@@ -30,6 +31,6 @@ class ReviewController extends AbstractController
      */
     public function getReviews(ReviewRepository $repository)
     {
-        return $repository->findAll();
+        return $repository->getReviews();
     }
 }
