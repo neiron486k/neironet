@@ -7,11 +7,13 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assets;
+use Fresh\VichUploaderSerializationBundle\Annotation as Fresh;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserProfileRepository")
  * @ORM\Table(name="user_profiles")
  * @Vich\Uploadable
+ * @Fresh\VichSerializableClass
  */
 class UserProfile implements \Serializable
 {
@@ -45,6 +47,7 @@ class UserProfile implements \Serializable
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Fresh\VichSerializableField("avatarFile")
      */
     private $avatar;
 
