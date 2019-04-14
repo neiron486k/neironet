@@ -10,6 +10,7 @@ easy_admin:
                     - { property: 'cover', type: 'image', base_path: '%app.path.images%' }
                     - title
                     - description
+                    - type
             show:
                 fields:
                     - id
@@ -19,6 +20,7 @@ easy_admin:
                     - title
                     - description
                     - content
+                    - type
             form:
                 fields:
                     - isPublished
@@ -27,4 +29,5 @@ easy_admin:
                     - { property: 'coverFile', type: 'file' }
                     - description
                     - content
+                    - type
         

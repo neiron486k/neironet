@@ -23,6 +23,14 @@ class ArticleControllerTest extends AbstractWebTestCase
         $article = $content[0];
         $this->assertHasKeys($article);
 
+        // with filter
+        $response = $this->request('GET', '/api/articles?type=work');
+        $this->assertTrue($response->isSuccessful());
+        $content = json_decode($response->getContent(), true);
+
+        foreach ($content as $article) {
+            $this->assertEquals('work', $article['type']['code']);
+        }
     }
 
     /**

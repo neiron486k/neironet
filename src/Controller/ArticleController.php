@@ -7,6 +7,8 @@ use App\Repository\ArticleRepository;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ArticleController
@@ -18,7 +20,13 @@ class ArticleController extends AbstractController
      * @FOSRest\Get("/api/articles", name="get_articles")
      * @FOSRest\View(serializerGroups={"Default"})
      * @param ArticleRepository $repository
+     * @param Request $request
      * @return \App\Entity\Article[]
+     *
+     * @QueryParam(
+     *   name="type",
+     *   nullable=true
+     * )
      *
      * @SWG\Response(
      *     response=200,
@@ -29,9 +37,10 @@ class ArticleController extends AbstractController
      *     )
      * )
      */
-    public function getArticles(ArticleRepository $repository): array
+    public function getArticles(ArticleRepository $repository, Request $request): array
     {
-        return $repository->getArticles();
+        $filter = $request->query->all();
+        return $repository->getArticles($filter);
     }
 
     /**

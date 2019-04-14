@@ -18,11 +18,27 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param array $filter
      * @return array
      */
-    public function getArticles(): array
+    public function getArticles(array $filter = []): array
     {
+        $type = $filter['type'] ?? null;
+        $parameters = [];
         $builder = $this->createQueryBuilder('a');
+        $builder
+            ->select(['a', 't'])
+            ->leftJoin('a.type', 't');
+
+        if ($type) {
+            $builder->where('t.code = :type');
+            $parameters['type'] = $type;
+        }
+
+        if ($parameters) {
+            $builder->setParameters($parameters);
+        }
+
         $builder->orderBy('a.priority', 'desc');
         return $builder->getQuery()->getResult();
     }

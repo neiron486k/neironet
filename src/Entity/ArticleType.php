@@ -45,4 +45,12 @@ class ArticleType
         $this->code = $code;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getCode();
+    }
 }

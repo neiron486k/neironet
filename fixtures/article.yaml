@@ -6,7 +6,7 @@ App\Entity\ArticleType:
     article:
         code: article
 App\Entity\Article:
-    article_{1..10}:
+    article_{1..5}:
         title: <name()>
         slug: slug<current()>
         description: <sentence(10)>
@@ -14,4 +14,13 @@ App\Entity\Article:
         cover: image<current()>.png
         isPublished: true
         type: '@service'
+        priority: <current()>
+    article_{6..10}:
+        title: <name()>
+        slug: slug<current()>
+        description: <sentence(10)>
+        content: <text()>
+        cover: image<current()>.png
+        isPublished: true
+        type: '@work'
         priority: <current()>
