@@ -1,0 +1,9 @@
+App\Entity\Review:
+    review_{1..5}:
+        content: <text()>
+        user: '@admin'
+        isPublished: <boolean()>
+    review_{6..10}:
+        content: <text()>
+        user: '@user'
+        isPublished: <boolean()>

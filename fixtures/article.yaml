@@ -12,6 +12,6 @@ App\Entity\Article:
         description: <sentence(10)>
         content: <text()>
         cover: image<current()>.png
-        isPublished: <boolean()>
+        isPublished: true
         type: '@service'
         priority: <current()>

@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Traits\PublishedTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use JMS\Serializer\Annotation as JMS;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
@@ -12,6 +15,9 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Review
 {
+    use TimestampableEntity,
+        PublishedTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,9 +38,24 @@ class Review
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @JMS\Expose()
-     * @JMS\Groups({"user"})
      */
     private $user;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     * @JMS\Expose()
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     * @JMS\Expose()
+     */
+    protected $updatedAt;
 
     public function getId(): ?int
     {

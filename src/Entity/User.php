@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Asserts;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class User implements UserInterface
 {
@@ -18,16 +20,19 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @JMS\Expose()
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @JMS\Expose()
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @JMS\Expose()
      */
     private $roles = [];
 
@@ -42,12 +47,15 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Asserts\Valid()
+     * @JMS\Expose()
      */
     private $profile;
 
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Review", mappedBy="user")
+     * @JMS\Expose()
+     * @JMS\Groups({"review"})
      */
     private $reviews;
 
