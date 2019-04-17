@@ -27,7 +27,7 @@ easy_admin:
                     - slug
                     - title
                     - { property: 'coverFile', type: 'file' }
-                    - description
-                    - content
+                    - { property: 'description', type: 'fos_ckeditor' }
+                    - { property: 'content', type: 'fos_ckeditor' }
                     - type
         
