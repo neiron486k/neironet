@@ -43,6 +43,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string
+     */
+    private $plainPassword;
+
+    /**
      * @var UserProfile
      * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
@@ -118,10 +123,28 @@ class User implements UserInterface
         return (string)$this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password = null): self
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return (string)$this->plainPassword;
+    }
+
+    /**
+     * @param string|null $plainPassword
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword = null): self
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 
