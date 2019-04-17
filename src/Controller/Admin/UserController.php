@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -30,6 +31,14 @@ class UserController extends AdminController
             'type' => PasswordType::class,
             'first_options' => ['label' => 'Password'],
             'second_options' => ['label' => 'Repeat Password'],
+        ])
+        ->add('roles', ChoiceType::class, [
+            'multiple' => true,
+            'expanded' => true,
+            'choices'  => [
+                'admin' => 'ROLE_ADMIN',
+                'user' => 'ROLE_USER',
+            ],
         ]);
         return $builder;
     }
