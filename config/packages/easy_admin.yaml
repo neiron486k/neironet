@@ -1,4 +1,5 @@
 imports:
+    - { resource: easyadmin/menu.yml }
     - { resource: easyadmin/user.yml }
     - { resource: easyadmin/article.yml }
     - { resource: easyadmin/article_type.yml }

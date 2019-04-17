@@ -1,0 +1,10 @@
+easy_admin:
+    design:
+        menu:
+            - { entity: User, icon: 'users' }
+            -  label: Articles
+               icon: 'book'
+               children:
+                   - { label: Article, icon: '', entity: Article }
+                   - { label: ArticleType, icon: '', entity: ArticleType }
+            - { entity: Review, icon: 'comments' }
