@@ -6,6 +6,7 @@ easy_admin:
                 fields:
                     - id
                     - isPublished
+                    - priority
                     - slug
                     - { property: 'cover', type: 'image', base_path: '%app.path.images%' }
                     - title
@@ -15,12 +16,12 @@ easy_admin:
                 fields:
                     - id
                     - isPublished
+                    - priority
                     - slug
                     - { property: 'cover', type: 'image', base_path: '%app.path.images%' }
                     - title
                     - description
                     - content
-                    - priority
                     - type
             new:
                 fields:
@@ -28,11 +29,11 @@ easy_admin:
             form:
                 fields:
                     - isPublished
+                    - priority
                     - { property: 'slug', type_options: { required: false } }
                     - title
                     - { property: 'coverFile', type: 'file' }
                     - { property: 'description', type: 'fos_ckeditor' }
                     - { property: 'content', type: 'fos_ckeditor' }
-                    - priority
                     - type
         
