@@ -201,7 +201,7 @@ class Article implements Translatable
      * @param string $slug
      * @return Article
      */
-    public function setSlug(string $slug): self
+    public function setSlug(string $slug = null): self
     {
         $this->slug = $slug;
         return $this;
@@ -210,7 +210,7 @@ class Article implements Translatable
     /**
      * @return ArticleType
      */
-    public function getType(): ArticleType
+    public function getType(): ?ArticleType
     {
         return $this->type;
     }

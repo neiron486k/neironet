@@ -20,14 +20,19 @@ easy_admin:
                     - title
                     - description
                     - content
+                    - priority
                     - type
+            new:
+                fields:
+                    - { property: 'coverFile', type: 'file', type_options: { required: true } }
             form:
                 fields:
                     - isPublished
-                    - slug
+                    - { property: 'slug', type_options: { required: false } }
                     - title
                     - { property: 'coverFile', type: 'file' }
                     - { property: 'description', type: 'fos_ckeditor' }
                     - { property: 'content', type: 'fos_ckeditor' }
+                    - priority
                     - type
         

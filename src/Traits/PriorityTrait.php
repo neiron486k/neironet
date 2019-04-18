@@ -14,7 +14,7 @@ trait PriorityTrait
      * @var int
      * @ORM\Column(type="integer")
      */
-    protected $priority;
+    protected $priority = 0;
 
     /**
      * @return int
