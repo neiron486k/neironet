@@ -19,13 +19,13 @@ class MailerService
     }
 
     /**
-     * @param string $from
+     * @param array $from
      * @param array $to
      * @param string $subject
      * @param string $body
      * @param string $contentType
      */
-    public function send(string $from, array $to, string $subject, string $body, string $contentType = 'text/html'): void
+    public function send(array $from, array $to, string $subject, string $body, string $contentType = 'text/html'): void
     {
         $message = (new \Swift_Message($subject))
             ->setFrom($from)

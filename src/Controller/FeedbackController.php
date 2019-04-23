@@ -40,8 +40,12 @@ class FeedbackController extends AbstractController
         }
 
         $mailerService->send(
-            $this->getParameter('app.mailer.noreply'),
-            [$this->getParameter('app.mailer.notification')],
+            [
+                $this->getParameter('app.mailer.noreply')
+            ],
+            [
+                $this->getParameter('app.mailer.notification'),
+            ],
             'Feedback ' . $data['phone'],
             $this->renderView('emails/feedback.html.twig', $data)
         );
