@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\FeedbackType;
-use FOS\RestBundle\Request\ParamFetcher;
+use App\Service\MailerService;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -17,8 +17,9 @@ class FeedbackController extends AbstractController
 {
     /**
      * @FOSRest\Post("/api/feedback/request", name="request_feedback")
-     * @param ParamFetcher $request
+     * @param Request $request
      * @param TranslatorInterface $translator
+     * @param MailerService $mailerService
      * @return string
      *
      * @RequestParam(
@@ -28,7 +29,7 @@ class FeedbackController extends AbstractController
      * )
      *
      */
-    public function requestFeedback(Request $request, TranslatorInterface $translator)
+    public function requestFeedback(Request $request, TranslatorInterface $translator, MailerService $mailerService)
     {
         $data = $request->request->all();
         $form = $this->createForm(FeedbackType::class);
@@ -38,7 +39,12 @@ class FeedbackController extends AbstractController
             return $this->createValidationErrorResponse($form);
         }
 
-        //@todo need to implement ability to send email
+        $mailerService->send(
+            $this->getParameter('app.mailer.noreply'),
+            [$this->getParameter('app.mailer.notification')],
+            'Feedback ' . $data['phone'],
+            $this->renderView('emails/feedback.html.twig', $data)
+        );
 
         return $translator->trans('feedback.request');
     }

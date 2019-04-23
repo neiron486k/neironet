@@ -6,6 +6,8 @@
 parameters:
     locale: 'en'
     app.path.images: /uploads/images
+    app.mailer.noreply: '%env(MAILER_NOREPLY)%'
+    app.mailer.notification: '%env(MAILER_NOTIFICATION)%'
 
 services:
     # default configuration for services in *this* file
