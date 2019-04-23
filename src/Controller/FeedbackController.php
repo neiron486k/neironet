@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Symfony\Component\Translation\TranslatorInterface;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
+use Swagger\Annotations as SWG;
 
 /**
  * Class FeedbackController
@@ -23,9 +24,21 @@ class FeedbackController extends AbstractController
      * @return string
      *
      * @RequestParam(
+     *   name="phone",
+     *   description="phone",
+     *   nullable=false
+     * )
+     * @RequestParam(
      *   name="content",
      *   description="content",
      *   nullable=false
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns the message of sent request",
+     *      @SWG\Schema(
+     *         type="string"
+     *     )
      * )
      *
      */
