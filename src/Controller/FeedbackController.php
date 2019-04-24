@@ -24,6 +24,11 @@ class FeedbackController extends AbstractController
      * @return string
      *
      * @RequestParam(
+     *   name="name",
+     *   description="name",
+     *   nullable=false
+     * )
+     * @RequestParam(
      *   name="phone",
      *   description="phone",
      *   nullable=false
@@ -39,6 +44,10 @@ class FeedbackController extends AbstractController
      *      @SWG\Schema(
      *         type="string"
      *     )
+     * )
+     *  @SWG\Response(
+     *     response=400,
+     *     description="Returns if validation errors"
      * )
      *
      */
@@ -59,7 +68,7 @@ class FeedbackController extends AbstractController
             [
                 $this->getParameter('app.mailer.notification'),
             ],
-            'Feedback ' . $data['phone'],
+            'Feedback request from ' . $data['name'],
             $this->renderView('emails/feedback.html.twig', $data)
         );
 

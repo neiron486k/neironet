@@ -21,6 +21,12 @@ class FeedbackType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank()
+                ],
+            ])
             ->add('phone', TextType::class, [
                 'required' => true,
                 'constraints' => [

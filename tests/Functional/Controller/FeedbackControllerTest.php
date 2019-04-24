@@ -20,6 +20,7 @@ class FeedbackControllerTest extends AbstractWebTestCase
 
         // with success
         $data = [
+            'name' => 'name',
             'content' => 'content',
             'phone' => 'phone'
         ];
