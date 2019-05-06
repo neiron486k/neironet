@@ -40,6 +40,9 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
         $builder->orderBy('a.priority', 'desc');
-        return $builder->getQuery()->getResult();
+        return $builder
+            ->getQuery()
+            ->setResultCacheId(Article::class)
+            ->getResult();
     }
 }
