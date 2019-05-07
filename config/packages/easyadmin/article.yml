@@ -2,6 +2,7 @@ easy_admin:
     entities:
         Article:
             class: App\Entity\Article
+            controller: App\Controller\Admin\ArticleController
             list:
                 fields:
                     - id
