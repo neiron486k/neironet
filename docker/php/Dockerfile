@@ -18,4 +18,6 @@ RUN  apt update \
   && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-configure zip --with-libzip \
   && docker-php-ext-install zip \
-  && docker-php-ext-install pdo_mysql
+  && docker-php-ext-install pdo_mysql \
+  && pecl install redis-5.0.2 \
+  && docker-php-ext-enable redis
