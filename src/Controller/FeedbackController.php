@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Feedback;
 use App\Form\FeedbackType;
+use App\Service\FeedbackService;
 use App\Service\MailerService;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
@@ -20,7 +22,7 @@ class FeedbackController extends AbstractController
      * @FOSRest\Post("/api/feedback/request", name="request_feedback")
      * @param Request $request
      * @param TranslatorInterface $translator
-     * @param MailerService $mailerService
+     * @param FeedbackService $service
      * @return string
      *
      * @RequestParam(
@@ -41,37 +43,28 @@ class FeedbackController extends AbstractController
      * @SWG\Response(
      *     response=200,
      *     description="Returns the message of sent request",
-     *      @SWG\Schema(
+     *     @SWG\Schema(
      *         type="string"
      *     )
      * )
-     *  @SWG\Response(
+     * @SWG\Response(
      *     response=400,
      *     description="Returns if validation errors"
      * )
      *
      */
-    public function requestFeedback(Request $request, TranslatorInterface $translator, MailerService $mailerService)
+    public function requestFeedback(Request $request, TranslatorInterface $translator, FeedbackService $service)
     {
         $data = $request->request->all();
-        $form = $this->createForm(FeedbackType::class);
+        $feedback = new Feedback();
+        $form = $this->createForm(FeedbackType::class, $feedback);
         $form->submit($data);
 
         if (!$form->isValid()) {
             return $this->createValidationErrorResponse($form);
         }
 
-        $mailerService->send(
-            [
-                $this->getParameter('app.mailer.noreply')
-            ],
-            [
-                $this->getParameter('app.mailer.notification'),
-            ],
-            'Feedback request from ' . $data['name'],
-            $this->renderView('emails/feedback.html.twig', $data)
-        );
-
+        $service->create($feedback);
         return $translator->trans('feedback.request');
     }
 }

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div>Name: {{ name }}</div>
-    <div>Phone: {{ phone }}</div>
+    <div>Name: {{ feedback.name }}</div>
+    <div>Phone: {{ feedback.phone }}</div>
     <div>
         <div>Content:</div>
-        <div>{{ content }}</div>
+        <div>{{ feedback.content }}</div>
     </div>
 {% endblock %}

@@ -5,12 +5,12 @@ services:
     ports:
       - "80:80"
     volumes:
-#      - .:/var/www/html
-#      - /var/www/html/var/cache
-#      - /var/www/html/var/log
+      - .:/var/www/html
+      - /var/www/html/var/cache
+      - /var/www/html/var/log
       - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
-  #  redis:
-  #    image: "redis:alpine"
+  redis:
+    image: "redis:alpine"
   php:
     build: './docker/php'
     volumes:
@@ -28,4 +28,3 @@ services:
     image: adminer
     ports:
       - 8080:8080
-
