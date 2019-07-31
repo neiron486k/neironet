@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Tests\Unit\Entity\AbstractEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Asserts;
 
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Asserts;
  *     name="feedback",
  * )
  */
-class Feedback
+class Feedback extends AbstractEntity
 {
     /**
      * @ORM\Id()
