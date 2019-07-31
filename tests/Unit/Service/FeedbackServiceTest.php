@@ -30,6 +30,9 @@ class FeedbackServiceTest extends WebTestCase
         $this->service = new FeedbackService($dispatcher, $manager);
     }
 
+    /**
+     * @covers \App\Service\FeedbackService::create
+     */
     public function testCreate()
     {
         $entity = new Feedback([
