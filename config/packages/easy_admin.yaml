@@ -4,6 +4,7 @@ imports:
     - { resource: easyadmin/article.yml }
     - { resource: easyadmin/article_type.yml }
     - { resource: easyadmin/review.yml }
+    - { resource: easyadmin/feedback.yml }
 
 easy_admin:
     design:

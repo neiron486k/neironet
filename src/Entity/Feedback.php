@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Tests\Unit\Entity\AbstractEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Asserts;
 
 /**
@@ -14,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Asserts;
  */
 class Feedback extends AbstractEntity
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -41,6 +44,12 @@ class Feedback extends AbstractEntity
      * @Asserts\NotBlank()
      */
     private $content;
+
+    public function __construct(array $data = null)
+    {
+        $this->createdAt = $this->updatedAt = new \DateTime();
+        parent::__construct($data);
+    }
 
     public function getId(): ?int
     {

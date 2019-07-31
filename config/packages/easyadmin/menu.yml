@@ -8,3 +8,4 @@ easy_admin:
                    - { label: Article, icon: '', entity: Article }
                    - { label: ArticleType, icon: '', entity: ArticleType }
             - { entity: Review, icon: 'comments' }
+            - { entity: Feedback }
